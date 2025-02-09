@@ -7,7 +7,7 @@ const tableName = 'games'
 const { createClient } = require("@supabase/supabase-js");
 
 const supabaseUrl = 'https://kkbudtrzmdwfydjhttgt.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrYnVkdHJ6bWR3Znlkamh0dGd0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3NjUwOTAsImV4cCI6MjA1NDM0MTA5MH0._OW4uS7Fnt_RbcXcMpwp4htcliee6WsKxRTFKNgnm5w'
+const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 // Middleware to parse JSON bodies
