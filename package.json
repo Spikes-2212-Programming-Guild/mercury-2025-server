@@ -1,0 +1,20 @@
+{
+  "name": "mercury-2025-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Spikes-2212-Programming-Guild/mercury-2025-server"
+  },
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
