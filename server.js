@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
 const PORT = process.env.PORT || 3000;
 const tableName = 'games'
 const { createClient } = require("@supabase/supabase-js");
@@ -10,11 +9,8 @@ const supabaseUrl = 'https://kkbudtrzmdwfydjhttgt.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-// Enable CORS
 app.use(cors());
+app.use(express.json());
 
 async function login(email, password) {
     const { user, session, error } = await supabase.auth.signInWithPassword({
