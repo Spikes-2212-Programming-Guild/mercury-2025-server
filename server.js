@@ -16,10 +16,6 @@ app.use(express.json());
 // Enable CORS
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-})
-
 async function login(email, password) {
     const { user, session, error } = await supabase.auth.signInWithPassword({
         email,
@@ -34,7 +30,7 @@ async function login(email, password) {
     return session?.access_token; // Use optional chaining
 }
 
-const userToken = login('mercury@gmail.com', '2212');
+const USER_TOKEN = login('mercury@gmail.com', '2212');
 
 app.post('/submit', async (req, res) => {
     const answers = {};
@@ -43,7 +39,7 @@ app.post('/submit', async (req, res) => {
     }
 
     const { error } = await supabase.from(tableName)
-        .insert([answers], { headers: { Authorization: `Bearer ${userToken}` }});
+        .insert([answers], { headers: { Authorization: `Bearer ${USER_TOKEN}` }});
 
     if (error) {
         console.error('Error saving data:', error);
