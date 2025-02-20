@@ -4,10 +4,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 const tableName = 'games'
 const { createClient } = require("@supabase/supabase-js");
-
-const supabaseUrl = 'https://kkbudtrzmdwfydjhttgt.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabase = createClient(process.env.SUPABASE_KEY, process.env.SUPABASE_URL)
 
 app.use(cors());
 app.use(express.json());
@@ -34,7 +31,7 @@ app.post('/submit', async (req, res) => {
     const { error } = await supabase.from(tableName)
         .insert([answers], { headers: { Authorization: `Bearer ${USER_TOKEN}` }});
     if (error) {
-        console.error('Error saving data:', error);
+        // console.error('Error saving data:', error);
         return res.status(500).send('Error saving data');
     } else {
         res.send('Thank you for submitting your answers!');
