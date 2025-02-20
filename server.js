@@ -17,32 +17,27 @@ async function login(email, password) {
         email,
         password,
     });
-
     if (error) {
-        console.error('Login error:', error.message); // Log the error message
+        console.error('Login error:', error.message);
         return;
     }
-
-    return session?.access_token; // Use optional chaining
+    return session?.access_token;
 }
 
-const USER_TOKEN = login('mercury@gmail.com', '2212');
+const USER_TOKEN = login( process.env.USERNAME, process.env.PASSWORD);
 
 app.post('/submit', async (req, res) => {
     const answers = {};
     for (const [id, answer] of Object.entries(req.body)) {
-        if (answer) answers[id] = answer;  // Store as key-value pairs in a single object
+        if (answer) answers[id] = answer;
     }
-
     const { error } = await supabase.from(tableName)
         .insert([answers], { headers: { Authorization: `Bearer ${USER_TOKEN}` }});
-
     if (error) {
         console.error('Error saving data:', error);
         return res.status(500).send('Error saving data');
     } else {
         res.send('Thank you for submitting your answers!');
-        console.log(answers);
     }
 });
 
