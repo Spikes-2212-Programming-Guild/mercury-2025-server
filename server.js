@@ -15,7 +15,7 @@ async function login(email, password) {
         password,
     });
     if (error) {
-        console.error('Login error:', error.message);
+        // console.error('Login error:', error.message);
         return;
     }
     return session?.access_token;
