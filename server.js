@@ -4,7 +4,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 const tableName = 'games'
 const { createClient } = require("@supabase/supabase-js");
-const supabase = createClient(process.env.SUPABASE_KEY, process.env.SUPABASE_URL)
+const supabase = createClient(process.env.SUPABASE_KEY, "https://kkbudtrzmdwfydjhttgt.supabase.co")
 
 app.use(cors());
 app.use(express.json());
