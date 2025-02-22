@@ -4,7 +4,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 3000;
 const tableName = 'games'
 const { createClient } = require("@supabase/supabase-js");
-const supabase = createClient(process.env.SUPABASE_KEY, 'https://kkbudtrzmdwfydjhttgt.supabase.co');
+const supabase = createClient(process.env.SUPABASE_KEY, process.env.SUPABASE_URL);
 
 app.use(cors());
 app.use(express.json());
@@ -15,13 +15,13 @@ async function login(email, password) {
         password,
     });
     if (error) {
-        // console.error('Login error:', error.message);
+        console.error('Login error:', error.message);
         return;
     }
     return session?.access_token;
 }
 
-const USER_TOKEN = login('mercury@gmail.com', '05c8bd5d4dcdb18b690e160fd7a5c5190ee9ce7eb565d88f8e7b1f81b5f25bf6');
+const USER_TOKEN = login(process.env.USERNAME, process.env.PASSWORD);
 
 app.post('/submit', async (req, res) => {
     const answers = {};
