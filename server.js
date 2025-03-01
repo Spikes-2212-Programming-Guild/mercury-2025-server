@@ -26,13 +26,14 @@ async function login(email, password) {
 const USER_TOKEN = login(process.env.USERNAME, process.env.PASSWORD);
 
 app.post('/submit', async (req, res) => {
-    const answers = {};
-    for (const [id, answer] of Object.entries(req.body)) {
-        if (answer) answers[id] = answer;
-    }
+    const answers = Object.entries(req.body).map(([id, answer], index) => ({
+        id,
+        answer,
+        order: index, // Add order index to track the submission order
+    }));
 
     const { error } = await supabase.from("games")
-        .insert([answers], { headers: { Authorization: `Bearer ${USER_TOKEN}` }});
+        .insert(answers, { headers: { Authorization: `Bearer ${USER_TOKEN}` }});
 
     if (error) {
         // console.error('Error saving data:', error);
